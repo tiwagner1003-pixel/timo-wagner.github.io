@@ -4,7 +4,7 @@
 	--bg: #ffffff;
 	--text: #111111;
 	--muted: #6c757d;
-	--link: #ffffff;
+	--link: #1a73e8;
 	--card-bg: #ffffff;
 	--navbar-bg: #f8f9fa;
 	--border: #dee2e6;
@@ -15,7 +15,7 @@
 	--bg: #0b0f13;
 	--text: #e6eef6;
 	--muted: #9aa6b2;
-	--link: #ffffff;
+	--link: #7aa2ff;
 	--card-bg: #0f1720;
 	--navbar-bg: #1a1f26;
 	--border: #2d3748;
@@ -152,6 +152,61 @@ html.dark .listing-category{
 }
 
 html.dark .category{
+	color: var(--text) !important;
+}
+
+/* Blog post content - ensure text is readable in dark mode */
+html.dark #quarto-document-content, html.dark .quarto-document-content,
+html.dark .page-columns .column-page, html.dark .page-columns .column-page-left,
+html.dark .page-columns .column-body, html.dark .page-columns .column-body-outset,
+html.dark .content article, html.dark main.content{
+	background-color: var(--bg) !important;
+	color: var(--text) !important;
+}
+
+html.dark .quarto-title, html.dark .title, html.dark .subtitle{
+	color: var(--text) !important;
+}
+
+html.dark #title-block-header, html.dark .quarto-title-block{
+	background-color: var(--bg) !important;
+	color: var(--text) !important;
+}
+
+html.dark .quarto-title-meta, html.dark .quarto-title-meta-content{
+	color: var(--muted) !important;
+}
+
+html.dark p, html.dark li, html.dark td, html.dark span, html.dark em, html.dark strong{
+	color: var(--text) !important;
+}
+
+html.dark blockquote{
+	background-color: rgba(122, 162, 255, 0.1) !important;
+	border-left-color: var(--link) !important;
+	color: var(--text) !important;
+}
+
+html.dark .cell-output, html.dark .cell-output-display, html.dark figure{
+	background-color: transparent !important;
+}
+
+html.dark table, html.dark thead, html.dark tbody, html.dark tr, html.dark td{
+	border-color: var(--border) !important;
+	color: var(--text) !important;
+	background-color: transparent !important;
+}
+
+html.dark table tbody tr:nth-child(odd){
+	background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+html.dark .quarto-margin-sidebar{
+	background-color: transparent !important;
+	color: var(--text) !important;
+}
+
+html.dark .sidebar .category, html.dark .sidebar .quarto-listing-category-title{
 	color: var(--text) !important;
 }
 
