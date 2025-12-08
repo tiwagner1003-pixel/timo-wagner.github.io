@@ -1,0 +1,187 @@
+---
+title: "KGV-Vergleich: Aktuelle Top‑10 vs. Dotcom‑Blase"
+author: "Timo Wagner"
+date: 2025-12-08
+format: html
+categories: [analysis, finance]
+---
+
+```{note}
+In diesem Beitrag berechne ich das Kurs‑Gewinn‑Verhältnis (KGV / P/E) der derzeit größten 10 Aktien (nach Marktkapitalisierung) und vergleiche diese Werte mit den Spitzen‑KGVs aus der Dotcom‑Blase (ca. 1998–2002) für eine Auswahl typischer Dotcom‑Titel.
+
+Wichtig: Historische Fundamentaldaten sind nicht immer vollständig oder konsistent verfügbar. Für die historischen KGV‑Schätzungen verwende ich verfügbare Jahresergebnisse (Net Income) aus yfinance und teile diese durch die aktuelle Aktienanzahl als Näherung — das ist eine grobe Annäherung und kann von genauer historischen Berichterstattung abweichen. Details siehe Methodik im Beitrag.
+```
+
+## Zusammenfassung
+
+Wir laden live Daten via `yfinance` und `pandas`, bestimmen die 10 größten Titel heute (Marktkapitalisierung) und berechnen:
+
+- aktuelles KGV (wenn verfügbar, `trailingPE`),
+- historische Peak‑KGV (Schätzwert) in der Dotcom‑Periode für ausgewählte Dotcom‑Titel.
+
+Die Ausführung kann einige Minuten dauern (API‑Aufrufe).
+
+```{python}
+import pandas as pd
+import yfinance as yf
+import datetime
+import matplotlib.pyplot as plt
+from time import sleep
+
+pd.options.display.float_format = '{:,.2f}'.format
+
+def safe_info(ticker):
+    try:
+        return yf.Ticker(ticker).info
+    except Exception as e:
+        return {}
+
+# 1) Ermitteln der S&P500-Tickerliste von Wikipedia (als Universe)
+sp500 = None
+try:
+    tables = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')
+    sp500 = tables[0]['Symbol'].tolist()
+except Exception:
+    # Fallback: eine kurze Liste bekannter große Titel
+    sp500 = ['AAPL','MSFT','NVDA','GOOGL','AMZN','META','TSLA','BRK-B','JPM','UNH']
+
+# Manche Symbole auf Wikipedia enthalten Punkte (BRK.B) oder andere Formen – yfinance erwartet -B style
+sp500 = [s.replace('.', '-') for s in sp500]
+
+print(f"Universe size: {len(sp500)}")
+
+# 2) Sammeln MarketCap und trailingPE für Universe (in Batches, schonend)
+rows = []
+for i, t in enumerate(sp500, 1):
+    info = safe_info(t)
+    mc = info.get('marketCap')
+    pe = info.get('trailingPE')
+    shortName = info.get('shortName') or t
+    rows.append({'ticker': t, 'name': shortName, 'marketCap': mc, 'trailingPE': pe})
+    if i % 50 == 0:
+        sleep(1)
+
+df = pd.DataFrame(rows).dropna(subset=['marketCap']).sort_values('marketCap', ascending=False).reset_index(drop=True)
+top10 = df.head(10).copy()
+top10.index = range(1, len(top10)+1)
+top10
+```
+
+```{python}
+# 3) Zeige aktuelle Top10 mit Marktwert + KGV
+display(top10[['ticker','name','marketCap','trailingPE']])
+
+# 4) Auswahl historischer Dotcom-Titel zur Analyse (üblich in 1999/2000)
+dotcom_candidates = ['MSFT','CSCO','INTC','ORCL','SUNW','YHOO','AOL','EBAY','AMZN','SAP']
+dotcom_candidates = [d.replace('.', '-') for d in dotcom_candidates]
+
+def historical_peak_pe(ticker, start='1998-01-01', end='2002-12-31'):
+    t = yf.Ticker(ticker)
+    hist = t.history(start=start, end=end, auto_adjust=False)
+    if hist.empty:
+        return None
+    # Peak price and date
+    peak_row = hist['Close'].idxmax()
+    peak_price = float(hist.loc[peak_row,'Close'])
+    peak_date = peak_row.date()
+
+    # Try to obtain annual net income (Ticker.earnings) and approximate EPS by using current sharesOutstanding
+    earnings = None
+    try:
+        earnings = t.earnings
+    except Exception:
+        earnings = None
+
+    shares = None
+    try:
+        shares = t.info.get('sharesOutstanding', None)
+    except Exception:
+        shares = None
+
+    # Choose the earnings year nearest <= peak year
+    est_eps = None
+    if isinstance(earnings, pd.DataFrame) and not earnings.empty and shares:
+        try:
+            peak_year = peak_date.year
+            # Use the earnings for the year a bit before the peak
+            candidate_years = [peak_year, peak_year-1, peak_year-2]
+            sel = None
+            for y in candidate_years:
+                if y in earnings.index:
+                    sel = y
+                    break
+            if sel is None:
+                # pick last available
+                sel = earnings.index.max()
+            net_income = float(earnings.loc[sel,'Earnings'])
+            # approximate EPS = net_income / sharesOutstanding
+            est_eps = net_income / shares
+        except Exception:
+            est_eps = None
+
+    peak_pe = None
+    if est_eps and est_eps>0:
+        peak_pe = peak_price / est_eps
+
+    return {
+        'ticker': ticker,
+        'peak_date': peak_date,
+        'peak_price': peak_price,
+        'approx_eps': est_eps,
+        'peak_pe_estimate': peak_pe,
+        'shares': shares
+    }
+
+hist_rows = []
+for t in dotcom_candidates:
+    try:
+        r = historical_peak_pe(t)
+        hist_rows.append(r)
+    except Exception as e:
+        hist_rows.append({'ticker': t, 'peak_date': None, 'peak_price': None, 'approx_eps': None, 'peak_pe_estimate': None, 'shares': None})
+    sleep(0.5)
+
+hist_df = pd.DataFrame(hist_rows).set_index('ticker')
+hist_df
+```
+
+```{python}
+# 5) Zusammenführung: Top10 heute vs. historische Dotcom-Peaks (für dotcom_candidates)
+cur = top10.set_index('ticker')[['name','marketCap','trailingPE']]
+dot = hist_df[['peak_date','peak_price','approx_eps','peak_pe_estimate','shares']]
+
+print('\nAktuelle Top-10 (Marktkapitalisierung)')
+display(cur)
+
+print('\nDotcom-Auswahl: geschätzte Peak-KGVs (1998-2002) — Näherung, siehe Methodik)')
+display(dot)
+
+# 6) Plot: Vergleich (Barplot) — nur für Werte vorhanden
+plt.figure(figsize=(10,5))
+plot_df = pd.DataFrame({
+    'current_PE': cur['trailingPE'].dropna(),
+    'dotcom_peak_PE': dot['peak_pe_estimate'].dropna()
+})
+
+# align indices for plotting side-by-side if some tickers overlap
+plot_df = plot_df.fillna(0)
+plot_df.plot(kind='bar', rot=45)
+plt.title('KGV: aktuell vs. Dotcom-Peak (Schätzung)')
+plt.ylabel('KGV')
+plt.tight_layout()
+plt.show()
+```
+
+## Methodik und Hinweise
+
+- Die aktuelle Top‑10 wurde anhand der im Live‑Abruf verfügbaren `marketCap`‑Felder ermittelt.
+- Aktuelle KGVs stammen aus `trailingPE` von yfinance (sofern verfügbar).
+- Historische Peak‑KGVs sind Schätzungen: Peak‑Schlusskurse (1998–2002) geteilt durch eine Näherung des historischen EPS (berechnet aus gemeldeten Jahres‑Nettoergebnissen geteilt durch die aktuell berichtete Aktienanzahl). Diese Näherung kann verzerrt sein, weil sich die Anzahl der ausgegebenen Aktien über die Zeit ändert und nicht alle historischen Jahresdaten vollständig sind.
+
+Wenn du möchtest, kann ich:
+
+- die Dotcom‑Auswahl erweitern oder anpassen (z. B. nur NASDAQ‑Top10 von 2000),
+- die historische EPS‑Berechnung verbessern (z. B. indem wir historische Aktienanzahlen versuchen zu beziehen),
+- den Post rendern und veröffentlichen (`quarto publish gh-pages`).
+
+```
