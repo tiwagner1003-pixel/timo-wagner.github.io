@@ -136,11 +136,30 @@ hist_rows = []
 for t in dotcom_candidates:
     try:
         r = historical_peak_pe(t)
+        # Normalize missing results into a dict so pandas can consume consistently
+        if r is None:
+            r = {
+                'ticker': t,
+                'peak_date': None,
+                'peak_price': None,
+                'approx_eps': None,
+                'peak_pe_estimate': None,
+                'shares': None,
+            }
         hist_rows.append(r)
     except Exception as e:
-        hist_rows.append({'ticker': t, 'peak_date': None, 'peak_price': None, 'approx_eps': None, 'peak_pe_estimate': None, 'shares': None})
+        hist_rows.append({
+            'ticker': t,
+            'peak_date': None,
+            'peak_price': None,
+            'approx_eps': None,
+            'peak_pe_estimate': None,
+            'shares': None,
+        })
     sleep(0.5)
 
+# Filter to dictionaries (robustness) and then build DataFrame
+hist_rows = [r for r in hist_rows if isinstance(r, dict)]
 hist_df = pd.DataFrame(hist_rows).set_index('ticker')
 hist_df
 ```
