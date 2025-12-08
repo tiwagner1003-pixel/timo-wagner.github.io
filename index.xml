@@ -10,52 +10,10 @@
 <atom:link href="https://tiwagner1003-pixel.github.io/timo-wagner.github.io/index.xml" rel="self" type="application/rss+xml"/>
 <description>A blog built with Quarto</description>
 <generator>quarto-1.8.26</generator>
-<lastBuildDate>Sat, 06 Dec 2025 23:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 07 Dec 2025 23:00:00 GMT</lastBuildDate>
 <item>
-  <title>Post With Code</title>
-  <dc:creator>Harlow Malloc</dc:creator>
-  <link>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/post-with-code/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>This is a post with executable code.</p>
-
-
-
- ]]></description>
-  <category>news</category>
-  <category>code</category>
-  <category>analysis</category>
-  <guid>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/post-with-code/</guid>
-  <pubDate>Sat, 06 Dec 2025 23:00:00 GMT</pubDate>
-  <media:content url="https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/post-with-code/image.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>Welcome To My Blog</title>
-  <dc:creator>Tristan O&#39;Malley</dc:creator>
-  <link>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/welcome/</link>
-  <description><![CDATA[ 
-
-
-
-
-
-<p>This is the first post in a Quarto blog. Welcome!</p>
-<p><img src="https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/welcome/thumbnail.jpg" class="img-fluid"></p>
-<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
-
-
-
- ]]></description>
-  <category>news</category>
-  <guid>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/welcome/</guid>
-  <pubDate>Wed, 03 Dec 2025 23:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Apple vs. Coca Cola</title>
+  <title>Apple vs. Coca Cola Aktie</title>
+  <dc:creator>Timo Wagner</dc:creator>
   <link>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/Probieren/</link>
   <description><![CDATA[ 
 
@@ -64,7 +22,7 @@
 
 
 <p>Im Folgenden möchte ich den Unterschied zwischen einer Value und einer Grwoth Aktie zeigen und wie sie sich die Renditen in den letzten 12 Monaten entwickelt hat.</p>
-<div id="88561861" class="cell" data-execution_count="1">
+<div id="b868d365" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> yfinance <span class="im" style="color: #00769E;
@@ -110,7 +68,7 @@ font-style: inherit;">100</span></span>
 <span id="cb1-9">plt.plot(normierte_daten)</span>
 <span id="cb1-10">plt.legend(tickers)</span></code></pre></div></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/cp/w44022r157l_c3xhd8y3m5h00000gn/T/ipykernel_30029/886571349.py:5: FutureWarning: YF.download() has changed argument auto_adjust default to True
+<pre><code>/var/folders/cp/w44022r157l_c3xhd8y3m5h00000gn/T/ipykernel_31348/886571349.py:5: FutureWarning: YF.download() has changed argument auto_adjust default to True
   data = yf.download(tickers, period="1y")['Close']
 [                       0%                       ][*********************100%***********************]  2 of 2 completed</code></pre>
 </div>
@@ -126,8 +84,53 @@ font-style: inherit;">100</span></span>
 
 
  ]]></description>
+  <category>finance</category>
   <guid>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/Probieren/</guid>
-  <pubDate>Mon, 08 Dec 2025 04:40:07 GMT</pubDate>
+  <pubDate>Sun, 07 Dec 2025 23:00:00 GMT</pubDate>
+  <media:content url="https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/Probieren/sean-pollock-PhYq704ffdA-unsplash.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Post With Code</title>
+  <dc:creator>Harlow Malloc</dc:creator>
+  <link>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/post-with-code/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This is a post with executable code.</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <category>code</category>
+  <category>analysis</category>
+  <guid>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/post-with-code/</guid>
+  <pubDate>Sat, 06 Dec 2025 23:00:00 GMT</pubDate>
+  <media:content url="https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/post-with-code/image.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Welcome To My Blog</title>
+  <dc:creator>Tristan O&#39;Malley</dc:creator>
+  <link>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This is the first post in a Quarto blog. Welcome!</p>
+<p><img src="https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/welcome/thumbnail.jpg" class="img-fluid"></p>
+<p>Since this post doesn’t specify an explicit <code>image</code>, the first image in the post will be used in the listing page of posts.</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <guid>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/welcome/</guid>
+  <pubDate>Wed, 03 Dec 2025 23:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Mein Chart Test</title>
@@ -207,7 +210,7 @@ font-style: inherit;">'MSCI World'</span>)</span>
 
  ]]></description>
   <guid>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/finance-test/</guid>
-  <pubDate>Mon, 08 Dec 2025 04:40:07 GMT</pubDate>
+  <pubDate>Mon, 08 Dec 2025 04:57:50 GMT</pubDate>
 </item>
 </channel>
 </rss>
