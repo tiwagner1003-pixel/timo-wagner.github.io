@@ -1,8 +1,13 @@
 [
   {
+    "listing": "/posts/blog.html",
+    "items": []
+  },
+  {
     "listing": "/index.html",
     "items": [
       "/posts/finance-test/index.html",
+      "/posts/blog.html",
       "/posts/Probieren/index.html",
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html"
