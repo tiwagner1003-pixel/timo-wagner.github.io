@@ -30,6 +30,21 @@ a{ color: var(--link); }
 	color: var(--text) !important;
 }
 
+/* Ensure navbar and nav links adapt to theme */
+.navbar, .navbar-brand, .navbar-title, .quarto-navbar-tools, .nav-link{
+	background-color: transparent !important;
+	color: var(--text) !important;
+}
+
+.nav-link, .navbar .menu-text{ color: var(--text) !important; }
+
+/* Buttons / small UI elements in header */
+.quarto-navbar-tools .btn, #theme-toggle{
+	color: var(--text) !important;
+	background: transparent !important;
+	border: none !important;
+}
+
 /* Theme toggle button basics (position can be adjusted) */
 #theme-toggle{
 	position: fixed;
