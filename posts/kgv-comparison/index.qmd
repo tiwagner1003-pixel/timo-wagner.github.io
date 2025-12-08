@@ -175,18 +175,26 @@ display(cur)
 print('\nDotcom-Auswahl: geschätzte Peak-KGVs (1998-2002) — Näherung, siehe Methodik)')
 display(dot)
 
-# 6) Plot: Vergleich (Barplot) — nur für Werte vorhanden
+# 6) Plot: Vergleich (Barplot) — aktuelle Top10 und Dotcom‑Peaks nebeneinander
 plt.figure(figsize=(10,5))
-plot_df = pd.DataFrame({
-    'current_PE': cur['trailingPE'].dropna(),
-    'dotcom_peak_PE': dot['peak_pe_estimate'].dropna()
-})
+# Build a combined DataFrame with both series aligned on tickers
+combined = pd.concat([
+    cur['trailingPE'].rename('current_PE'),
+    dot['peak_pe_estimate'].rename('dotcom_peak_PE')
+], axis=1)
 
-# align indices for plotting side-by-side if some tickers overlap
-plot_df = plot_df.fillna(0)
-plot_df.plot(kind='bar', rot=45)
-plt.title('KGV: aktuell vs. Dotcom-Peak (Schätzung)')
-plt.ylabel('KGV')
+# Order: put current Top10 first, then any dotcom tickers not in Top10
+order = list(cur.index) + [t for t in dot.index if t not in cur.index]
+order = [t for t in order if t in combined.index]
+if len(order) == 0:
+    order = combined.index.tolist()
+
+combined = combined.reindex(order)
+
+# Plot — NaN values will be left blank so only available values are shown
+ax = combined.plot(kind='bar', rot=45)
+ax.set_title('KGV: aktuell vs. Dotcom-Peak (Schätzung)')
+ax.set_ylabel('KGV')
 plt.tight_layout()
 plt.show()
 ```
@@ -197,10 +205,5 @@ plt.show()
 - Aktuelle KGVs stammen aus `trailingPE` von yfinance (sofern verfügbar).
 - Historische Peak‑KGVs sind Schätzungen: Peak‑Schlusskurse (1998–2002) geteilt durch eine Näherung des historischen EPS (berechnet aus gemeldeten Jahres‑Nettoergebnissen geteilt durch die aktuell berichtete Aktienanzahl). Diese Näherung kann verzerrt sein, weil sich die Anzahl der ausgegebenen Aktien über die Zeit ändert und nicht alle historischen Jahresdaten vollständig sind.
 
-Wenn du möchtest, kann ich:
-
-- die Dotcom‑Auswahl erweitern oder anpassen (z. B. nur NASDAQ‑Top10 von 2000),
-- die historische EPS‑Berechnung verbessern (z. B. indem wir historische Aktienanzahlen versuchen zu beziehen),
-- den Post rendern und veröffentlichen (`quarto publish gh-pages`).
 
 ```
