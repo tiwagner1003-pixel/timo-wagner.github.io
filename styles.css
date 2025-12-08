@@ -6,15 +6,19 @@
 	--muted: #6c757d;
 	--link: #1a73e8;
 	--card-bg: #ffffff;
+	--navbar-bg: #f8f9fa;
+	--border: #dee2e6;
 }
 
-/* Dark theme variables applied when `.dark` is set on <html> or <body> */
+/* Dark theme variables applied when `.dark` is set on <html> or body */
 .dark{
 	--bg: #0b0f13;
 	--text: #e6eef6;
 	--muted: #9aa6b2;
 	--link: #7aa2ff;
 	--card-bg: #0f1720;
+	--navbar-bg: #1a1f26;
+	--border: #2d3748;
 }
 
 /* Apply variables to common elements */
@@ -23,34 +27,75 @@ html, body{
 	color: var(--text) !important;
 }
 
+/* Header and navbar background */
+#quarto-header, .quarto-banner, header{
+	background-color: var(--navbar-bg) !important;
+	border-bottom: 1px solid var(--border) !important;
+}
+
+.navbar{
+	background-color: var(--navbar-bg) !important;
+}
+
+/* Links */
 a{ color: var(--link); }
 
-.card, .site-container, .page-body, .post, .quarto-body{
-	background-color: var(--card-bg) !important;
+/* Content areas */
+.page-columns, .content, .quarto-body, .main, main, .page-body, .post, 
+.quarto-title-block, #title-block-header{
+	background-color: var(--bg) !important;
 	color: var(--text) !important;
 }
 
-/* Theme toggle button basics (position can be adjusted) */
+/* Nav items and brand */
+.navbar-brand, .navbar-title, .nav-link, .navbar .menu-text{
+	color: var(--text) !important;
+}
+
+.navbar-title{
+	color: var(--text) !important;
+	font-weight: 600;
+}
+
+/* Toggle button in navbar */
 #theme-toggle{
-	position: fixed;
-	top: 12px;
-	right: 12px;
-	z-index: 1200;
+	padding: 4px 8px;
 	border: none;
-	background: rgba(255,255,255,0.9);
-	color: #111;
-	padding: 6px 10px;
-	border-radius: 8px;
-	cursor: pointer;
-	box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-}
-
-.dark #theme-toggle{
-	background: rgba(20,24,28,0.6);
+	background: transparent;
 	color: var(--text);
+	cursor: pointer;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-/* Smooth transition for theme change */
+#theme-toggle:hover{
+	background-color: rgba(0,0,0,0.05);
+}
+
+.dark #theme-toggle:hover{
+	background-color: rgba(255,255,255,0.1);
+}
+
+#theme-toggle i{
+	font-size: 18px;
+	line-height: 1;
+}
+
+/* Code and pre elements */
+pre, code, .sourceCode{
+	background-color: var(--card-bg) !important;
+	color: var(--text) !important;
+	border: 1px solid var(--border) !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6{
+	color: var(--text) !important;
+}
+
+/* Smooth transitions */
 *{
 	transition: background-color 180ms ease, color 180ms ease;
 }
