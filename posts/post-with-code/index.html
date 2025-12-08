@@ -177,36 +177,26 @@ ul.task-list li input[type="checkbox"] {
 
 
 </main> <!-- /main -->
-<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode" class="btn btn-sm nav-link">
+<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode" class="nav-link">
   <i class="bi-moon-fill" aria-hidden="true"></i>
 </button>
 
-<!-- Move the toggle into the navbar tools container so it appears in the header/navbar on all pages -->
+<!-- Move the toggle into the navbar tools container so it appears properly aligned with search -->
+<script src="site_libs/dark-mode/dark-mode.js"></script>
 <script>
   (function(){
     function moveToggle(){
       const btn = document.getElementById('theme-toggle');
       if(!btn) return;
       const tools = document.querySelector('.quarto-navbar-tools');
-      if(tools){
+      if(tools && !tools.querySelector('#theme-toggle')){
         tools.appendChild(btn);
-      } else {
-        const header = document.getElementById('quarto-header');
-        if(header) header.appendChild(btn);
       }
     }
     if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', moveToggle);
     else moveToggle();
   })();
 </script>
-
-<script src="site_libs/dark-mode/dark-mode.js"></script>
-<style>
-  /* Navbar-integrated toggle styling */
-  #theme-toggle{ padding:4px 8px; margin-left:8px; border-radius:6px; }
-  .dark #theme-toggle{ color: var(--text); }
-  #theme-toggle i{ font-size: 16px; line-height: 1; }
-</style>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
