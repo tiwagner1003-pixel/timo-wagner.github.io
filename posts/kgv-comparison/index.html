@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Timo Wagner">
-<meta name="dcterms.date" content="2025-12-08">
 
-<title>KGV-Vergleich: Aktuelle Top‑10 vs.&nbsp;Dotcom‑Blase – Timos Finance Blog</title>
+<title>index – Timos Finance Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,39 +126,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">KGV-Vergleich: Aktuelle Top‑10 vs.&nbsp;Dotcom‑Blase</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">analysis</div>
-                <div class="quarto-category">finance</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Timo Wagner </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">December 8, 2025</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block"></header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -170,21 +136,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-
-<section id="einleitung" class="level2">
-<h2 class="anchored" data-anchor-id="einleitung">Einleitung</h2>
-<p>In diesem Beitrag vergleichen wir die Bewertung der aktuell wertvollsten Unternehmen der Welt mit den extremen Bewertungen während der Dotcom-Blase (ca. 2000).</p>
-<p>Wir betrachten das <strong>KGV (Kurs-Gewinn-Verhältnis)</strong>, im Englischen P/E (Price-to-Earnings).</p>
-<ul>
-<li><strong>Aktuelle Daten:</strong> Live via <code>yfinance</code> für die Top 10 nach Marktkapitalisierung.</li>
-<li><strong>Historische Benchmarks:</strong> Bekannte Peak-KGVs prominenter Dotcom-Titel (z.B. Cisco, Yahoo, Intel) auf dem Höhepunkt der Blase.</li>
-</ul>
 <p>import pandas as pd import yfinance as yf import matplotlib.pyplot as plt import seaborn as sns</p>
-</section>
-<section id="einstellung-für-saubere-zahlenformatierung" class="level1">
-<h1>Einstellung für saubere Zahlenformatierung</h1>
 <p>pd.options.display.float_format = ‘{:,.2f}’.format sns.set_theme(style=“whitegrid”)</p>
-</section>
 <section id="section" class="level1">
 <h1>———————————————————</h1>
 </section>
@@ -193,80 +146,46 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="section-1" class="level1">
 <h1>———————————————————</h1>
-</section>
-<section id="um-api-limits-und-lange-ladezeiten-zu-vermeiden-scannen-wir-eine" class="level1">
-<h1>Um API-Limits und lange Ladezeiten zu vermeiden, scannen wir eine</h1>
-</section>
-<section id="kuratierte-liste-von-mega-caps-die-höchstwahrscheinlich-die-top-10-bilden." class="level1">
-<h1>kuratierte Liste von “Mega Caps”, die höchstwahrscheinlich die Top 10 bilden.</h1>
-</section>
-<section id="ein-scan-aller-500-sp-titel-via-.info-dauert-zu-lange-und-ist-fehleranfällig" class="level1">
-<h1>(Ein Scan aller 500 S&amp;P Titel via .info dauert zu lange und ist fehleranfällig)</h1>
 <p>candidate_tickers = [ ‘AAPL’, ‘NVDA’, ‘MSFT’, ‘GOOGL’, ‘AMZN’, ‘META’, ‘TSLA’, ‘BRK-B’, ‘LLY’, ‘AVGO’, ‘JPM’, ‘V’, ‘WMT’, ‘XOM’, ‘UNH’, ‘MA’]</p>
-<p>def get_current_data(tickers): data_rows = [] # Nutzung von Tickers() für effizienteren Abruf (Batch-Download wo möglich) tickers_obj = yf.Tickers(’ ’.join(tickers))</p>
+<p>def get_current_data(tickers): “““Fetch current market cap and P/E ratio for given tickers.”“” data_rows = [] tickers_obj = yf.Tickers(’ ’.join(tickers))</p>
 <pre><code>for t in tickers:
     try:
         info = tickers_obj.tickers[t].info
-        
-        # Wichtige Kennzahlen extrahieren
         mc = info.get('marketCap')
         pe = info.get('trailingPE')
-        name = info.get('shortName') or t
+        name = info.get('shortName', t)
         
-        # Nur hinzufügen, wenn MarketCap verfügbar ist
-        if mc:
+        if mc is not None:  # More explicit None check
             data_rows.append({
                 'Ticker': t,
                 'Name': name,
-                'MarketCap_B': mc / 1e9, # in Milliarden
+                'MarketCap_B': mc / 1e9,
                 'P/E Current': pe
             })
-    except Exception:
+    except Exception as e:
+        print(f"Warnung: Fehler beim Abrufen von {t}: {e}")
         continue
         
 return pd.DataFrame(data_rows)</code></pre>
-</section>
-<section id="daten-laden-und-sortieren" class="level1">
-<h1>Daten laden und sortieren</h1>
-<p>df_candidates = get_current_data(candidate_tickers) df_top10 = df_candidates.sort_values(‘MarketCap_B’, ascending=False).head(10).reset_index(drop=True)</p>
-</section>
-<section id="index-auf-1-10-setzen-für-schöne-darstellung" class="level1">
-<h1>Index auf 1-10 setzen für schöne Darstellung</h1>
-<p>df_top10.index = range(1, 11)</p>
-<p>print(“Aktuelle Top 10 nach Marktkapitalisierung:”) display(df_top10[[‘Name’, ‘MarketCap_B’, ‘P/E Current’]])</p>
+<p>df_candidates = get_current_data(candidate_tickers) df_top10 = df_candidates.sort_values(‘MarketCap_B’, ascending=False).head(10).reset_index(drop=True) df_top10.index = range(1, 11)</p>
+<p>print(“Aktuelle Top 10 nach Marktkapitalisierung:”) print(df_top10[[‘Name’, ‘MarketCap_B’, ‘P/E Current’]])</p>
 </section>
 <section id="section-2" class="level1">
 <h1>———————————————————</h1>
 </section>
-<section id="historische-benchmarks-dotcom-blase" class="level1">
-<h1>2. HISTORISCHE BENCHMARKS (DOTCOM BLASE)</h1>
+<section id="historische-benchmarks" class="level1">
+<h1>2. HISTORISCHE BENCHMARKS</h1>
 </section>
 <section id="section-3" class="level1">
 <h1>———————————————————</h1>
+<p>dotcom_data = pd.DataFrame({ ‘Ticker’: [‘CSCO’, ‘QCOM’, ‘YHOO’, ‘AMZN’, ‘MSFT’, ‘ORCL’], ‘Name’: [‘Cisco (2000)’, ‘Qualcomm (2000)’, ‘Yahoo! (Peak)’, ‘Amazon (Peak)’, ‘Microsoft (2000)’, ‘Oracle (2000)’], ‘P/E Peak’: [196.0, 150.0, 450.0, 300.0, 85.0, 88.0], ‘Type’: ‘Dotcom Bubble’ })</p>
 </section>
-<section id="hinweis-die-berechnung-historischer-kgvs-via-api-ist-fehleranfällig" class="level1">
-<h1>Hinweis: Die Berechnung historischer KGVs via API ist fehleranfällig,</h1>
-</section>
-<section id="da-historische-gewinne-oft-nicht-korrekt-auf-heutige-aktienanzahlen-splits" class="level1">
-<h1>da historische Gewinne oft nicht korrekt auf heutige Aktienanzahlen (Splits)</h1>
-</section>
-<section id="angepasst-werden.-wir-verwenden-daher-verifizierte-historische-peak-werte" class="level1">
-<h1>angepasst werden. Wir verwenden daher verifizierte historische Peak-Werte</h1>
-</section>
-<section id="aus-der-finanzliteratur-stand-ca.-märz-2000." class="level1">
-<h1>aus der Finanzliteratur (Stand ca. März 2000).</h1>
-<p>dotcom_data = { ‘Ticker’: [‘CSCO’, ‘QCOM’, ‘YHOO (Hist)’, ‘AMZN (2000)’, ‘MSFT (2000)’, ‘ORCL’], ‘Name’: [‘Cisco (2000)’, ‘Qualcomm (2000)’, ‘Yahoo! (Peak)’, ‘Amazon (Peak)’, ‘Microsoft (2000)’, ‘Oracle (2000)’], ‘P/E Peak’: [196.0, 150.0, 450.0, 300.0, 85.0, 88.0], # Beispielwerte / Näherungswerte ‘Type’: ‘Dotcom Bubble’ }</p>
-<p>df_dotcom = pd.DataFrame(dotcom_data)</p>
-</section>
-<section id="wir-markieren-die-aktuellen-top-10-ebenfalls-für-den-plot" class="level1">
-<h1>Wir markieren die aktuellen Top 10 ebenfalls für den Plot</h1>
-<p>df_top10_plot = df_top10[[‘Ticker’, ‘Name’, ‘P/E Current’]].copy() df_top10_plot = df_top10_plot.rename(columns={‘P/E Current’: ‘P/E’}) df_top10_plot[‘Type’] = ‘Top 10 Today’</p>
-<p>df_dotcom_plot = df_dotcom[[‘Ticker’, ‘Name’, ‘P/E Peak’]].copy() df_dotcom_plot = df_dotcom_plot.rename(columns={‘P/E Peak’: ‘P/E’}) df_dotcom_plot[‘Type’] = ‘Dotcom Bubble’</p>
-</section>
-<section id="zusammenfügen-für-visualisierung" class="level1">
-<h1>Zusammenfügen für Visualisierung</h1>
-<p>df_combined = pd.concat([df_top10_plot, df_dotcom_plot], ignore_index=True)</p>
-<p>print(“Dotcom-Blase:”) display(df_dotcom[[‘Name’, ‘P/E Peak’]])</p>
+<section id="prepare-data-for-plotting" class="level1">
+<h1>Prepare data for plotting</h1>
+<p>df_top10_plot = df_top10[[‘Ticker’, ‘Name’, ‘P/E Current’]].copy() df_top10_plot.columns = [‘Ticker’, ‘Name’, ‘P/E’] df_top10_plot[‘Type’] = ‘Top 10 Today’</p>
+<p>df_dotcom_plot = dotcom_data[[‘Ticker’, ‘Name’, ‘P/E Peak’]].copy() df_dotcom_plot.columns = [‘Ticker’, ‘Name’, ‘P/E’] df_dotcom_plot[‘Type’] = ‘Dotcom Bubble’</p>
+<p>df_combined = pd.concat([df_top10_plot, df_dotcom_plot], ignore_index=True) df_combined = df_combined.dropna(subset=[‘P/E’]) # Remove NaN values</p>
+<p>print(“-Blase Peak-Werte:”) print(dotcom_data[[‘Name’, ‘P/E Peak’]])</p>
 </section>
 <section id="section-4" class="level1">
 <h1>———————————————————</h1>
@@ -276,18 +195,9 @@ return pd.DataFrame(data_rows)</code></pre>
 </section>
 <section id="section-5" class="level1">
 <h1>———————————————————</h1>
-<p>plt.figure(figsize=(12, 6))</p>
-</section>
-<section id="barplot-erstellen" class="level1">
-<h1>Barplot erstellen</h1>
-<p>ax = sns.barplot( data=df_combined, x=‘Name’, y=‘P/E’, hue=‘Type’, palette={‘Top 10 Today’: ‘#1f77b4’, ‘Dotcom Bubble’: ‘#d62728’} )</p>
-</section>
-<section id="titel-und-labels" class="level1">
-<h1>Titel und Labels</h1>
-<p>plt.title(‘KGV-Vergleich: Top 10 Heute vs.&nbsp;Dotcom-Blase Peaks’, fontsize=14, pad=20) plt.xlabel(’‘) plt.ylabel(’Kurs-Gewinn-Verhältnis (P/E)’) plt.xticks(rotation=45, ha=‘right’) plt.legend(title=‘Ära’)</p>
-</section>
-<section id="werte-über-den-balken-anzeigen" class="level1">
-<h1>Werte über den Balken anzeigen</h1>
+<p>fig, ax = plt.subplots(figsize=(14, 6))</p>
+<p>sns.barplot( data=df_combined, x=‘Name’, y=‘P/E’, hue=‘Type’, palette={‘Top 10 Today’: ‘#1f77b4’, ‘Dotcom Bubble’: ‘#d62728’}, ax=ax )</p>
+<p>ax.set_title(‘KGV-Vergleich: Top 10 Heute vs.&nbsp;Dotcom-Blase Peaks’, fontsize=14, pad=20) ax.set_xlabel(’‘) ax.set_ylabel(’Kurs-Gewinn-Verhältnis (P/E)’) ax.tick_params(axis=‘x’, rotation=45) plt.setp(ax.get_xticklabels(), rotation=45, ha=‘right’)</p>
 <p>for container in ax.containers: ax.bar_label(container, fmt=‘%.0f’, padding=3, fontsize=9)</p>
 <p>plt.tight_layout() plt.show()</p>
 
