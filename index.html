@@ -361,12 +361,15 @@ Tristan O’Malley
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div></main> <!-- /main -->
-<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode" class="btn btn-sm">
+  <i class="bi-moon-fill" aria-hidden="true"></i>
+</button>
 <script src="site_libs/dark-mode/dark-mode.js"></script>
 <style>
-  /* Fallback/quick positioning in case site CSS doesn't apply */
-  #theme-toggle{ position: fixed; top: 12px; right: 12px; z-index:1200; border:none; background:rgba(255,255,255,0.9); color:#111; padding:6px 10px; border-radius:8px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.12); }
-  .dark #theme-toggle{ background: rgba(20,24,28,0.6); color: #fff; }
+  /* Positioning to match site header aesthetics */
+  #theme-toggle{ position: fixed; top: 12px; right: 12px; z-index:1200; border:none; background:rgba(255,255,255,0.9); color:#111; padding:6px 8px; border-radius:6px; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+  .dark #theme-toggle{ background: rgba(20,24,28,0.6); color: var(--text); }
+  #theme-toggle i{ font-size: 16px; line-height: 1; }
 </style>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
