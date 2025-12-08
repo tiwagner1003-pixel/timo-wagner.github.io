@@ -1,1 +1,56 @@
 /* css styles */
+
+:root{
+	--bg: #ffffff;
+	--text: #111111;
+	--muted: #6c757d;
+	--link: #1a73e8;
+	--card-bg: #ffffff;
+}
+
+/* Dark theme variables applied when `.dark` is set on <html> or <body> */
+.dark{
+	--bg: #0b0f13;
+	--text: #e6eef6;
+	--muted: #9aa6b2;
+	--link: #7aa2ff;
+	--card-bg: #0f1720;
+}
+
+/* Apply variables to common elements */
+html, body{
+	background-color: var(--bg) !important;
+	color: var(--text) !important;
+}
+
+a{ color: var(--link); }
+
+.card, .site-container, .page-body, .post, .quarto-body{
+	background-color: var(--card-bg) !important;
+	color: var(--text) !important;
+}
+
+/* Theme toggle button basics (position can be adjusted) */
+#theme-toggle{
+	position: fixed;
+	top: 12px;
+	right: 12px;
+	z-index: 1200;
+	border: none;
+	background: rgba(255,255,255,0.9);
+	color: #111;
+	padding: 6px 10px;
+	border-radius: 8px;
+	cursor: pointer;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.dark #theme-toggle{
+	background: rgba(20,24,28,0.6);
+	color: var(--text);
+}
+
+/* Smooth transition for theme change */
+*{
+	transition: background-color 180ms ease, color 180ms ease;
+}

@@ -3,21 +3,29 @@ project:
 
 website:
   description: "A blog built with Quarto"
-  site-url: https://your-website-url.example.com # you must change this appropriately for RSS feeds to work properly
+  site-url: https://tiwagner1003-pixel.github.io/timo-wagner.github.io/ # you must change this appropriately for RSS feeds to work properly
   title: "Timos Finance Blog"
   navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: blog.qmd      # <--- Das ist neu!
+        text: Blog
+      - href: about.qmd
+        text: About Me
     right:
       - about.qmd
       - icon: github
         href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+      - icon: linkedin
+        href: https://www.linkedin.com/in/timo-wagner04/
 format:
   html:
     theme:
       - cosmo
       - brand
     css: styles.css
+    include-after-body: site_libs/dark-mode/dark-mode.html
 
 
 
