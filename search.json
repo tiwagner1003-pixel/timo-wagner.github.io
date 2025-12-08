@@ -2,9 +2,9 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About Timo Wagner",
     "section": "",
-    "text": "About this blog"
+    "text": "Hi, ich bin Timo.\nIch nutze diesen Blog als mein persönliches Notizbuch für alles, was mit Finance und Programmieren zu tun hat. Ich glaube daran, dass man Dinge am besten lernt, wenn man sie baut und erklärt.\nAktuell vertiefe ich meine Kenntnisse in Python und Data Science, um bessere Entscheidungen an der Börse zu treffen. Hier findest du meine Experimente mit pandas, yfinance und Visualisierungen. Danke, dass du vorbeischaust!"
   },
   {
     "objectID": "posts/welcome/index.html",
