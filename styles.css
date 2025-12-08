@@ -95,6 +95,54 @@ h1, h2, h3, h4, h5, h6{
 	color: var(--text) !important;
 }
 
+/* Search and listing elements */
+#quarto-search, .quarto-search, .ql-input{
+	color: var(--text) !important;
+	background-color: transparent !important;
+}
+
+#quarto-search input, .quarto-search input{
+	color: var(--text) !important;
+	background-color: rgba(255,255,255,0.1) !important;
+	border-color: var(--border) !important;
+}
+
+.dark #quarto-search input, .dark .quarto-search input{
+	background-color: rgba(0,0,0,0.3) !important;
+	color: var(--text) !important;
+	border-color: var(--border) !important;
+}
+
+#quarto-search-results, .quarto-search-results{
+	background-color: var(--card-bg) !important;
+	color: var(--text) !important;
+	border-color: var(--border) !important;
+}
+
+/* Listing cards on homepage */
+.listing, .listing-item, .list-item, .card, 
+.quarto-listing, .listing-default, 
+.list, .list-item-container{
+	background-color: var(--card-bg) !important;
+	color: var(--text) !important;
+	border-color: var(--border) !important;
+}
+
+.listing-date, .listing-title, .listing-author, .listing-description, 
+.listing-categories, .list-item-title, .list-item-subtitle{
+	color: var(--text) !important;
+}
+
+/* Search icon color */
+.bi-search, .bi-search-icon{
+	color: var(--text) !important;
+}
+
+#quarto-search svg{
+	stroke: var(--text) !important;
+	fill: var(--text) !important;
+}
+
 /* Smooth transitions */
 *{
 	transition: background-color 180ms ease, color 180ms ease;
