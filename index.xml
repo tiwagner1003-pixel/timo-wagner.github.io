@@ -54,5 +54,160 @@
   <guid>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/welcome/</guid>
   <pubDate>Wed, 03 Dec 2025 23:00:00 GMT</pubDate>
 </item>
+<item>
+  <title>Apple vs. Coca Cola</title>
+  <link>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/Probieren/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Im Folgenden möchte ich den Unterschied zwischen einer Value und einer Grwoth Aktie zeigen und wie sie sich die Renditen in den letzten 12 Monaten entwickelt hat.</p>
+<div id="88561861" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> yfinance <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> yf</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">tickers <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"AAPL"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"KO"</span>]</span>
+<span id="cb1-5">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> yf.download(tickers, period<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1y"</span>)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Close'</span>]</span>
+<span id="cb1-6">data.iloc[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span>
+<span id="cb1-7">normierte_daten <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> (data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> data.iloc[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span></span>
+<span id="cb1-8"></span>
+<span id="cb1-9">plt.plot(normierte_daten)</span>
+<span id="cb1-10">plt.legend(tickers)</span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/cp/w44022r157l_c3xhd8y3m5h00000gn/T/ipykernel_30029/886571349.py:5: FutureWarning: YF.download() has changed argument auto_adjust default to True
+  data = yf.download(tickers, period="1y")['Close']
+[                       0%                       ][*********************100%***********************]  2 of 2 completed</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/Probieren/index_files/figure-html/cell-2-output-2.png" width="575" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <guid>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/Probieren/</guid>
+  <pubDate>Mon, 08 Dec 2025 04:40:07 GMT</pubDate>
+</item>
+<item>
+  <title>Mein Chart Test</title>
+  <link>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/finance-test/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Hier ist ein Test.</p>
+<div id="acbf45b6" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> yfinance <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> yf</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-3">ticker_symbol <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"URTH"</span></span>
+<span id="cb1-4">data <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> yf.download(ticker_symbol, period <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1y"</span>)</span>
+<span id="cb1-5"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> data.empty:</span>
+<span id="cb1-6">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fehler: Keine Daten für das angegebene Ticker-Symbol gefunden."</span>)</span>
+<span id="cb1-7"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span>:</span>
+<span id="cb1-8">    plt.figure(figsize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>))</span>
+<span id="cb1-9">    plt.plot(data.index, data[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Close'</span>])</span>
+<span id="cb1-10">    plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'MSCI World'</span>)</span>
+<span id="cb1-11">    plt.show()</span></code></pre></div></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/cp/w44022r157l_c3xhd8y3m5h00000gn/T/ipykernel_28896/949227837.py:4: FutureWarning: YF.download() has changed argument auto_adjust default to True
+  data = yf.download(ticker_symbol, period = "1y")
+[*********************100%***********************]  1 of 1 completed</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/finance-test/index_files/figure-html/cell-2-output-2.png" width="798" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <guid>https://tiwagner1003-pixel.github.io/timo-wagner.github.io/posts/finance-test/</guid>
+  <pubDate>Mon, 08 Dec 2025 04:40:07 GMT</pubDate>
+</item>
 </channel>
 </rss>

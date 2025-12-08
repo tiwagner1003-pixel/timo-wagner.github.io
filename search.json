@@ -21,10 +21,24 @@
     "text": "This is a post with executable code."
   },
   {
+    "objectID": "posts/Probieren/index.html",
+    "href": "posts/Probieren/index.html",
+    "title": "Apple vs. Coca Cola",
+    "section": "",
+    "text": "Im Folgenden möchte ich den Unterschied zwischen einer Value und einer Grwoth Aktie zeigen und wie sie sich die Renditen in den letzten 12 Monaten entwickelt hat.\n\nimport yfinance as yf\nimport matplotlib.pyplot as plt\n\ntickers = [\"AAPL\", \"KO\"]\ndata = yf.download(tickers, period=\"1y\")['Close']\ndata.iloc[0]\nnormierte_daten = (data / data.iloc[0]) * 100\n\nplt.plot(normierte_daten)\nplt.legend(tickers)\n\n/var/folders/cp/w44022r157l_c3xhd8y3m5h00000gn/T/ipykernel_30029/886571349.py:5: FutureWarning: YF.download() has changed argument auto_adjust default to True\n  data = yf.download(tickers, period=\"1y\")['Close']\n[                       0%                       ][*********************100%***********************]  2 of 2 completed"
+  },
+  {
+    "objectID": "posts/finance-test/index.html",
+    "href": "posts/finance-test/index.html",
+    "title": "Mein Chart Test",
+    "section": "",
+    "text": "Hier ist ein Test.\n\nimport yfinance as yf\nimport matplotlib.pyplot as plt\nticker_symbol = \"URTH\"\ndata = yf.download(ticker_symbol, period = \"1y\")\nif data.empty:\n    print(\"Fehler: Keine Daten für das angegebene Ticker-Symbol gefunden.\")\nelse:\n    plt.figure(figsize=(10,5))\n    plt.plot(data.index, data['Close'])\n    plt.title('MSCI World')\n    plt.show()\n\n/var/folders/cp/w44022r157l_c3xhd8y3m5h00000gn/T/ipykernel_28896/949227837.py:4: FutureWarning: YF.download() has changed argument auto_adjust default to True\n  data = yf.download(ticker_symbol, period = \"1y\")\n[*********************100%***********************]  1 of 1 completed"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "timo-wagner.github.io",
     "section": "",
-    "text": "Post With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 7, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nDec 4, 2025\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
+    "text": "Apple vs. Coca Cola\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMein Chart Test\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nDec 7, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nDec 4, 2025\n\n\nTristan O’Malley\n\n\n\n\n\nNo matching items"
   }
 ]
