@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Timo Wagner">
+<meta name="dcterms.date" content="2025-12-09">
 
-<title>index – Timos Finance Blog</title>
+<title>KGV-Vergleich: Top 10 Heute vs.&nbsp;Dotcom-Blase (2000) – Timos Finance Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -68,6 +70,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -126,7 +131,38 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block"></header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">KGV-Vergleich: Top 10 Heute vs.&nbsp;Dotcom-Blase (2000)</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">finance</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Timo Wagner </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 9, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -136,95 +172,152 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>import pandas as pd import yfinance as yf import matplotlib.pyplot as plt import seaborn as sns</p>
-<p>pd.options.display.float_format = ‘{:,.2f}’.format sns.set_theme(style=“whitegrid”)</p>
-<section id="section" class="level1">
-<h1>———————————————————</h1>
-</section>
-<section id="datenbeschaffung-aktuelle-top-10" class="level1">
-<h1>1. DATENBESCHAFFUNG: AKTUELLE TOP 10</h1>
-</section>
-<section id="section-1" class="level1">
-<h1>———————————————————</h1>
-<p>candidate_tickers = [ ‘AAPL’, ‘NVDA’, ‘MSFT’, ‘GOOGL’, ‘AMZN’, ‘META’, ‘TSLA’, ‘BRK-B’, ‘LLY’, ‘AVGO’, ‘JPM’, ‘V’, ‘WMT’, ‘XOM’, ‘UNH’, ‘MA’]</p>
-<p>def get_current_data(tickers): “““Fetch current market cap and P/E ratio for given tickers.”“” data_rows = [] tickers_obj = yf.Tickers(’ ’.join(tickers))</p>
-<pre><code>for t in tickers:
-    try:
-        info = tickers_obj.tickers[t].info
-        mc = info.get('marketCap')
-        pe = info.get('trailingPE')
-        name = info.get('shortName', t)
-        
-        if mc is not None:  # More explicit None check
-            data_rows.append({
-                'Ticker': t,
-                'Name': name,
-                'MarketCap_B': mc / 1e9,
-                'P/E Current': pe
-            })
-    except Exception as e:
-        print(f"Warnung: Fehler beim Abrufen von {t}: {e}")
-        continue
-        
-return pd.DataFrame(data_rows)</code></pre>
-<p>df_candidates = get_current_data(candidate_tickers) df_top10 = df_candidates.sort_values(‘MarketCap_B’, ascending=False).head(10).reset_index(drop=True) df_top10.index = range(1, 11)</p>
-<p>print(“Aktuelle Top 10 nach Marktkapitalisierung:”) print(df_top10[[‘Name’, ‘MarketCap_B’, ‘P/E Current’]])</p>
-</section>
-<section id="section-2" class="level1">
-<h1>———————————————————</h1>
-</section>
-<section id="historische-benchmarks" class="level1">
-<h1>2. HISTORISCHE BENCHMARKS</h1>
-</section>
-<section id="section-3" class="level1">
-<h1>———————————————————</h1>
-<p>dotcom_data = pd.DataFrame({ ‘Ticker’: [‘CSCO’, ‘QCOM’, ‘YHOO’, ‘AMZN’, ‘MSFT’, ‘ORCL’], ‘Name’: [‘Cisco (2000)’, ‘Qualcomm (2000)’, ‘Yahoo! (Peak)’, ‘Amazon (Peak)’, ‘Microsoft (2000)’, ‘Oracle (2000)’], ‘P/E Peak’: [196.0, 150.0, 450.0, 300.0, 85.0, 88.0], ‘Type’: ‘Dotcom Bubble’ })</p>
-</section>
-<section id="prepare-data-for-plotting" class="level1">
-<h1>Prepare data for plotting</h1>
-<p>df_top10_plot = df_top10[[‘Ticker’, ‘Name’, ‘P/E Current’]].copy() df_top10_plot.columns = [‘Ticker’, ‘Name’, ‘P/E’] df_top10_plot[‘Type’] = ‘Top 10 Today’</p>
-<p>df_dotcom_plot = dotcom_data[[‘Ticker’, ‘Name’, ‘P/E Peak’]].copy() df_dotcom_plot.columns = [‘Ticker’, ‘Name’, ‘P/E’] df_dotcom_plot[‘Type’] = ‘Dotcom Bubble’</p>
-<p>df_combined = pd.concat([df_top10_plot, df_dotcom_plot], ignore_index=True) df_combined = df_combined.dropna(subset=[‘P/E’]) # Remove NaN values</p>
-<p>print(“-Blase Peak-Werte:”) print(dotcom_data[[‘Name’, ‘P/E Peak’]])</p>
-</section>
-<section id="section-4" class="level1">
-<h1>———————————————————</h1>
-</section>
-<section id="visualisierung" class="level1">
-<h1>3. VISUALISIERUNG</h1>
-</section>
-<section id="section-5" class="level1">
-<h1>———————————————————</h1>
-<p>fig, ax = plt.subplots(figsize=(14, 6))</p>
-<p>sns.barplot( data=df_combined, x=‘Name’, y=‘P/E’, hue=‘Type’, palette={‘Top 10 Today’: ‘#1f77b4’, ‘Dotcom Bubble’: ‘#d62728’}, ax=ax )</p>
-<p>ax.set_title(‘KGV-Vergleich: Top 10 Heute vs.&nbsp;Dotcom-Blase Peaks’, fontsize=14, pad=20) ax.set_xlabel(’‘) ax.set_ylabel(’Kurs-Gewinn-Verhältnis (P/E)’) ax.tick_params(axis=‘x’, rotation=45) plt.setp(ax.get_xticklabels(), rotation=45, ha=‘right’)</p>
-<p>for container in ax.containers: ax.bar_label(container, fmt=‘%.0f’, padding=3, fontsize=9)</p>
-<p>plt.tight_layout() plt.show()</p>
+
+<p>In diesem Beitrag vergleiche ich die Kurs-Gewinn-Verhältnisse (KGV / P/E) der 10 größten Aktien nach Marktkapitalisierung heute mit den 10 größten Aktien aus der Dotcom-Blase (2000).</p>
+<div id="26ad0bf8" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-stderr">
+<pre><code>/var/folders/cp/w44022r157l_c3xhd8y3m5h00000gn/T/ipykernel_55164/993955113.py:85: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(data=df_today_plot.dropna(subset=['P/E']), x='Name', y='P/E',
+/var/folders/cp/w44022r157l_c3xhd8y3m5h00000gn/T/ipykernel_55164/993955113.py:110: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(data=df_dotcom_plot, x='Name', y='P/E',</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/cell-2-output-2.png" width="1328" height="566" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
 
 
-</section>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Ticker</th>
+<th data-quarto-table-cell-role="th">MarketCap_B</th>
+<th data-quarto-table-cell-role="th">P/E</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>NVIDIA Corporation</td>
+<td>NVDA</td>
+<td>4,517.59</td>
+<td>46.04</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Apple Inc.</td>
+<td>AAPL</td>
+<td>4,124.00</td>
+<td>37.30</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Alphabet Inc.</td>
+<td>GOOGL</td>
+<td>3,799.81</td>
+<td>30.97</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Microsoft Corporation</td>
+<td>MSFT</td>
+<td>3,649.83</td>
+<td>34.92</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Amazon.com, Inc.</td>
+<td>AMZN</td>
+<td>2,425.50</td>
+<td>32.05</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Broadcom Inc.</td>
+<td>AVGO</td>
+<td>1,894.14</td>
+<td>103.11</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Meta Platforms, Inc.</td>
+<td>META</td>
+<td>1,680.69</td>
+<td>29.50</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Tesla, Inc.</td>
+<td>TSLA</td>
+<td>1,461.96</td>
+<td>303.16</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Berkshire Hathaway Inc. New</td>
+<td>BRK-B</td>
+<td>1,072.69</td>
+<td>15.90</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Walmart Inc. Common Stock</td>
+<td>WMT</td>
+<td>905.40</td>
+<td>39.71</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Kurze Anmerkungen:</p>
+<ul>
+<li>Die historischen P/E-Werte der Dotcom-Top10 stammen aus veröffentlichten historischen Übersichten und sind Näherungswerte.</li>
+<li>Bei einigen heutigen Unternehmen liefert Yahoo Finance kein trailing P/E; diese werden als “N/A” angezeigt.</li>
+<li>Die Auswahl der Kandidaten für heutige Top10 ist eine pragmatische Liste großer, bekannter Firmen. Wenn du möchtest, kann ich stattdessen ein vollständiges Screening (z.B. S&amp;P 500) zur Bestimmung der Top10 nach Marktkapitalisierung durchführen.</li>
+</ul>
+<p>Wenn du willst, führe ich den Code lokal aus, prüfe die Grafiken und passe das Design an (Farben, Schriftgrößen, Beschriftungen). Soll ich das tun?</p>
+
+
 
 </main> <!-- /main -->
-<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode" class="nav-link">
-  <i class="bi-moon-fill" aria-hidden="true"></i>
-</button>
-
-<!-- Move the toggle into the navbar tools container so it appears properly aligned with search -->
-<script src="site_libs/dark-mode/dark-mode.js"></script>
-<script>
-  (function(){
-    function moveToggle(){
-      const btn = document.getElementById('theme-toggle');
-      if(!btn) return;
-      const tools = document.querySelector('.quarto-navbar-tools');
-      if(tools && !tools.querySelector('#theme-toggle')){
-        tools.appendChild(btn);
+<!-- Robust dark-mode include: load dark-mode.js if present -->
+<div id="quarto-dark-mode-placeholder">
+  <script>
+    (function(){
+      var path = 'site_libs/dark-mode/dark-mode.js';
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('HEAD', path, false);
+        xhr.send();
+        if (xhr.status === 200) {
+          var s = document.createElement('script');
+          s.src = path;
+          s.defer = true;
+          document.head.appendChild(s);
+        }
+      } catch (e) {
+        // silent fallback if file not present or request blocked
+        console.debug('dark-mode script not loaded:', e);
       }
-    }
-    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', moveToggle);
-    else moveToggle();
-  })();
-</script>
+    })();
+  </script>
+</div>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

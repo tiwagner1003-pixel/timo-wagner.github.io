@@ -207,7 +207,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="YW5hbHlzaXM=">analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29kZQ==">code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZmluYW5jZQ==">finance <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="YW5hbHlzaXM=">analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29kZQ==">code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZmluYW5jZQ==">finance <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -240,26 +240,7 @@ Hier ist ein Test.
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1765225521067" data-listing-reading-time-sort="3" data-listing-word-count-sort="531">
-<div class="thumbnail"><a href="./posts/kgv-comparison/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/kgv-comparison/index.html" class="no-external">———————————————————</a>
-</h3>
-<div class="delink listing-description"><a href="./posts/kgv-comparison/index.html" class="no-external">
-import pandas as pd import yfinance as yf import matplotlib.pyplot as plt import seaborn as sns
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/kgv-comparison/index.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1765218361114" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1765218361114" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <div class="thumbnail"><a href="./posts/blog.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -280,6 +261,36 @@ import pandas as pd import yfinance as yf import matplotlib.pyplot as plt import
 </div>
 <div class="metadata">
 <a href="./posts/blog.html" class="no-external">
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="ZmluYW5jZQ==" data-listing-date-sort="1765234800000" data-listing-file-modified-sort="1765396374665" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="876">
+<div class="thumbnail"><a href="./posts/kgv-comparison/index.html" class="no-external">
+
+<p class="card-img-top"><img src="posts/kgv-comparison/index_files/figure-html/cell-2-output-2.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/kgv-comparison/index.html" class="no-external">KGV-Vergleich: Top 10 Heute vs.&nbsp;Dotcom-Blase (2000)</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('ZmluYW5jZQ=='); return false;">finance</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/kgv-comparison/index.html" class="no-external">
+In diesem Beitrag vergleiche ich die Kurs-Gewinn-Verhältnisse (KGV / P/E) der 10 größten Aktien nach Marktkapitalisierung heute mit den 10 größten Aktien aus der…
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/kgv-comparison/index.html" class="no-external">
+<div class="listing-date">
+Dec 9, 2025
+</div>
+<div class="listing-author">
+Timo Wagner
+</div>
 </a>
 </div>
 </div>
@@ -380,26 +391,28 @@ Tristan O’Malley
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div></main> <!-- /main -->
-<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode" class="nav-link">
-  <i class="bi-moon-fill" aria-hidden="true"></i>
-</button>
-
-<!-- Move the toggle into the navbar tools container so it appears properly aligned with search -->
-<script src="site_libs/dark-mode/dark-mode.js"></script>
-<script>
-  (function(){
-    function moveToggle(){
-      const btn = document.getElementById('theme-toggle');
-      if(!btn) return;
-      const tools = document.querySelector('.quarto-navbar-tools');
-      if(tools && !tools.querySelector('#theme-toggle')){
-        tools.appendChild(btn);
+<!-- Robust dark-mode include: load dark-mode.js if present -->
+<div id="quarto-dark-mode-placeholder">
+  <script>
+    (function(){
+      var path = 'site_libs/dark-mode/dark-mode.js';
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('HEAD', path, false);
+        xhr.send();
+        if (xhr.status === 200) {
+          var s = document.createElement('script');
+          s.src = path;
+          s.defer = true;
+          document.head.appendChild(s);
+        }
+      } catch (e) {
+        // silent fallback if file not present or request blocked
+        console.debug('dark-mode script not loaded:', e);
       }
-    }
-    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', moveToggle);
-    else moveToggle();
-  })();
-</script>
+    })();
+  </script>
+</div>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
